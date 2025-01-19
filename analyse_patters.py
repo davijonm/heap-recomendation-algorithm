@@ -114,21 +114,29 @@ def first_unique_billing_code(data, patient_id):
                     return code
     return None
 
-# Example usage
 if __name__ == "__main__":
     data = {
         "patients": [
             {
                 "id": "P001",
                 "claims": [
-                    {"id": "C001", "amount": 100, "billingCode": "B001", "date": "2024-01-01"},
-                    {"id": "C002", "amount": 200, "billingCode": "B001", "date": "2024-01-05"},
-                    {"id": "C003", "amount": 150, "billingCode": "B002", "date": "2024-01-10"}
+                    {"id": "C001", "amount": 100, "billingCode": "B001", "date": "2025-01-01"},
+                    {"id": "C002", "amount": 200, "billingCode": "B002", "date": "2025-01-05"},
+                    {"id": "C003", "amount": 150, "billingCode": "B003", "date": "2025-01-10"}
                 ]
-            }
+            },
+            {
+                "id": "P002",
+                "claims": [
+                    {"id": "C001", "amount": 100, "billingCode": "B001", "date": "2025-01-01"},
+                    {"id": "C002", "amount": 200, "billingCode": "B002", "date": "2025-01-15"},
+                    {"id": "C003", "amount": 150, "billingCode": "B002", "date": "2025-01-10"}
+                ]
+            },
         ]
     }
-    print("Related Claims")
+
+    print("\nRelated Claims")
     print(extract_related_claims(data, "C001"))
 
     print("\nMax Claim in the last days")
@@ -141,7 +149,7 @@ if __name__ == "__main__":
     print(most_frequent_billing_code(data, "P001"))
 
     print("\nFilter claims for a given patient within a specific date range.")
-    print(filter_claims_by_date(data, "P001", "2024-01-01", "2024-01-06"))
+    print(filter_claims_by_date(data, "P001", "2025-01-01", "2025-01-06"))
 
     print("\nLength of the longest contiguous subarray of claims with the same billing code for a given patient ID.")
     print(longest_contiguous_subarray_same_code(data, "P001"))

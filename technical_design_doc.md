@@ -1,7 +1,7 @@
 # Technical design questions:
 
 1. Data Structure Choice:
-  Which data structures would you use to efficiently store and retrieve the top 10 clicked products, and why?
+  ### Which data structures would you use to efficiently store and retrieve the top 10 clicked products, and why?
 
   A hashmap (dictionary) to store click counts, where the key is the product_id and the value is the number of clicks.
   A min-heap of size 10 to efficiently retrieve the top 10 clicked products.
@@ -11,7 +11,7 @@
   The min-heap ensures O(log 10) time complexity for maintaining the top 10 clicked products, making it efficient for real-time updates.
 
 2. Efficiency and Scaling:
-  How would your solution scale with an increasing number of unique products?
+  ### How would your solution scale with an increasing number of unique products?
 
   #### Answer:
   The hashmap grows linearly with the number of unique products, and its lookup and update remain O(1).
@@ -30,7 +30,7 @@
   Min-heap: Constant O(10) for storing the top 10 products.
 
 3. Concurrency Handling:
-  How would you manage concurrent updates to click counts in a web application with thousands of concurrent users?
+  ### How would you manage concurrent updates to click counts in a web application with thousands of concurrent users?
 
     #### Answer:
     Use a thread-safe counter (e.g., Python's collections.Counter with thread locks) to handle updates.
@@ -38,7 +38,7 @@
     Use a read-write lock to allow multiple concurrent reads while ensuring write operations are atomic.
 
 4. Latency vs Consistency:
-   How would you balance real-time updates with eventual consistency?
+   ### How would you balance real-time updates with eventual consistency?
 
     #### Answer:
     Real-time updates: Use in-memory storage (e.g., Redis) to reduce latency for click updates and top 10 retrievals.
@@ -46,7 +46,7 @@
     A combination of caching and batching can optimize for both latency and consistency.
 
 5. Extensibility:
-    How would you modify the design to track additional metrics like purchases or views in the future?
+    ### How would you modify the design to track additional metrics like purchases or views in the future?
 
     #### Answer:
     Use a generalized data structure like a hashmap of dictionaries to track multiple metrics:
@@ -59,7 +59,7 @@
     Use an abstraction layer to define metric-specific update and retrieval logic.
 
 6. Data Persistence and Recovery:
-   How would you ensure the click data persists and can be recovered in case of a system crash?
+   ### How would you ensure the click data persists and can be recovered in case of a system crash?
 
     #### Answer:
     Use a persistent key-value store (Redis, DynamoDB) for real-time storage.
@@ -67,7 +67,7 @@
     Implement a recovery mechanism to load data from the database into memory upon system restart
 
 7. Testing Strategy:
-   How would you test your implementation to ensure correctness, thread safety, and performance?
+   ### How would you test your implementation to ensure correctness, thread safety, and performance?
 
     #### Answer:
     Test that record_click updates counts accurately.
@@ -82,7 +82,7 @@
     Test with a large number of unique products to ensure scalability.
 
 8. Monitoring and Alerts:
-   What monitoring metrics and alerts would you set up to ensure the system is functioning as expected?
+   ### What monitoring metrics and alerts would you set up to ensure the system is functioning as expected?
 
     #### Answer:
     Total number of clicks processed.
