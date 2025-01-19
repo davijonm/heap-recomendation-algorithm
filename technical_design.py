@@ -43,3 +43,26 @@ class TrendyProductRecommender:
             # lock ensure thread safety. This means that the code block within this statement is executed while holding a lock, preventing other threads from modifying self.top_10_heap concurrently. This is crucial in a multi-threaded environment to avoid race conditions and ensure data consistency.
             # Convert the heap into a sorted list in descending order
             return sorted(self.top_10_heap, key=lambda x: (-x[0], x[1]))
+
+
+def test_recommender():
+    recommender = TrendyProductRecommender()
+
+    clicks = [101, 102, 103, 103]
+
+    for i, product_id in enumerate(clicks):
+        print(f"\nClick {i+1}: Product {product_id}")
+        recommender.record_click(product_id)
+
+        # Show the current state of recorded clicks
+        print("Clicks count:", recommender.click_counts)
+
+        # Show the current state of the top 10 products heap (not ordered)
+        print("Top 10 heap (not ordered):", recommender.top_10_heap)
+
+        # Show the top 10 most clicked products
+        top_10 = recommender.get_top_10_clicked_products()
+        print("Top 10 products clicked", top_10)
+
+
+test_recommender()
